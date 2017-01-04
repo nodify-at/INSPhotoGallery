@@ -96,9 +96,9 @@ open class INSPhotosOverlayView: UIView , INSPhotosOverlayViewable {
             
             UIView.animate(withDuration: 0.2, delay: 0.0, options: [.allowAnimatedContent, .allowUserInteraction], animations: { () -> Void in
                 self.alpha = hidden ? 0.0 : 1.0
-                }, completion: { result in
-                    self.alpha = 1.0
-                    self.isHidden = hidden
+            }, completion: { result in
+                self.alpha = 1.0
+                self.isHidden = hidden
             })
         } else {
             self.isHidden = hidden
@@ -107,10 +107,10 @@ open class INSPhotosOverlayView: UIView , INSPhotosOverlayViewable {
     
     open func populateWithPhoto(_ photo: INSPhotoViewable) {
         self.currentPhoto = photo
-
+        
         if let photosViewController = photosViewController {
             if let index = photosViewController.dataSource.indexOfPhoto(photo) {
-                navigationItem.title = String(format:NSLocalizedString("%d of %d",comment:""), index+1, photosViewController.dataSource.numberOfPhotos)
+                navigationItem.title = NSLocalizedString("\(index+1) of \(photosViewController.dataSource.numberOfPhotos)", comment: "1 of 10")
             }
             captionLabel.attributedText = photo.attributedTitle
         }
@@ -145,7 +145,7 @@ open class INSPhotosOverlayView: UIView , INSPhotosOverlayViewable {
         navigationBar.items = [navigationItem]
         addSubview(navigationBar)
         
-        let topConstraint = NSLayoutConstraint(item: navigationBar, attribute: .top, relatedBy: .equal, toItem: self, attribute: .top, multiplier: 1.0, constant: 0.0)
+        let topConstraint = NSLayoutConstraint(item: navigationBar, attribute: .top, relatedBy: .equal, toItem: self, attribute: .top, multiplier: 1.0, constant: 15.0)
         let widthConstraint = NSLayoutConstraint(item: navigationBar, attribute: .width, relatedBy: .equal, toItem: self, attribute: .width, multiplier: 1.0, constant: 0.0)
         let horizontalPositionConstraint = NSLayoutConstraint(item: navigationBar, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX, multiplier: 1.0, constant: 0.0)
         self.addConstraints([topConstraint,widthConstraint,horizontalPositionConstraint])
